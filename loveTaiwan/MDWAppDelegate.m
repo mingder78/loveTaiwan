@@ -9,30 +9,36 @@
 #import "MDWAppDelegate.h"
 #import "JSONKit.h"
 #import "AFNetworking.h"
+#import "GDataXMLNode.h"
 
 @implementation MDWAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    NSString *jsonData = [NSString stringWithContentsOfURL:[[NSURL alloc] initWithString: @"http://query.yahooapis.com/v1/public/yql/ming/td4"]
-                                                  encoding:NSUTF8StringEncoding error:nil];
-    if (nil != jsonData) {
+    NSString *xmlData = [NSString stringWithContentsOfURL:[[NSURL alloc] initWithString: @"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%20%3D%20%22https%3A%2F%2Fwww.caac.ccu.edu.tw%2Fcaac102%2F102ad_ColgtQrym%2Fhtml%2F102_011332.htm%22%20and%20xpath%20%3D%20%22%2F%2Ftable%5B2%5D%2Ftr%2Ftd%5B4%5D%2Ffont%22"] encoding:NSUTF8StringEncoding error:nil];
+    if (nil != xmlData) {
+        NSError *error = nil;
+        
+        GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithXMLString:xmlData options:0 error:&error];
+        
+        
 #ifdef DEBUG
-        NSLog(@"%s|%@",__PRETTY_FUNCTION__,jsonData);
+        NSLog(@"%s|%@",__PRETTY_FUNCTION__,xmlData);
 #endif
-        JSONDecoder* decoder = [[JSONDecoder alloc] init];
-        NSDictionary *resultsDictionary = [decoder objectWithData:[jsonData dataUsingEncoding:NSUTF8StringEncoding]];
         
-        NSDictionary *items = [resultsDictionary objectForKey:@"query"];
-        NSDictionary  *response = [items objectForKey:@"results"];
+        //    NSArray *partyMembers = [doc.rootElement elementsForName:@"Player"];
+        NSArray *partyMembers = [doc nodesForXPath:@"//query/results/font" error:nil];
         
-        NSArray *dataArray = [response objectForKey:@"font"];
-        
-        for (NSDictionary *item in dataArray) {
-            NSLog(@"%@", [item objectForKey:@"content"]);
+        for(GDataXMLElement *partyMember in partyMembers) {
+#ifdef DEBUG
+            NSLog(@"%s|%@",__PRETTY_FUNCTION__,partyMember.stringValue);
+#endif
         }
     }
+    
+    
+    //    }
     return YES;
 }
 
