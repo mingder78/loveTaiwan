@@ -31,7 +31,7 @@
     if (self) {
         // Create the data model.
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        _pageData = [[dateFormatter monthSymbols] copy];
+        _pageData = [dateFormatter monthSymbols];
     }
     return self;
 }

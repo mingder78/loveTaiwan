@@ -7,12 +7,32 @@
 //
 
 #import "MDWAppDelegate.h"
+#import "JSONKit.h"
+#import "AFNetworking.h"
 
 @implementation MDWAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    NSString *jsonData = [NSString stringWithContentsOfURL:[[NSURL alloc] initWithString: @"http://query.yahooapis.com/v1/public/yql/ming/td4"]
+                                                  encoding:NSUTF8StringEncoding error:nil];
+    if (nil != jsonData) {
+#ifdef DEBUG
+        NSLog(@"%s|%@",__PRETTY_FUNCTION__,jsonData);
+#endif
+        JSONDecoder* decoder = [[JSONDecoder alloc] init];
+        NSDictionary *resultsDictionary = [decoder objectWithData:[jsonData dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSDictionary *items = [resultsDictionary objectForKey:@"query"];
+        NSDictionary  *response = [items objectForKey:@"results"];
+        
+        NSArray *dataArray = [response objectForKey:@"font"];
+        
+        for (NSDictionary *item in dataArray) {
+            NSLog(@"%@", [item objectForKey:@"content"]);
+        }
+    }
     return YES;
 }
 
@@ -24,7 +44,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
