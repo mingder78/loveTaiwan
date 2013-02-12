@@ -16,23 +16,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    NSString *xmlData = [NSString stringWithContentsOfURL:[[NSURL alloc] initWithString: @"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%20%3D%20%22https%3A%2F%2Fwww.caac.ccu.edu.tw%2Fcaac102%2F102ad_ColgtQrym%2Fhtml%2F102_011332.htm%22%20and%20xpath%20%3D%20%22%2F%2Ftable%5B2%5D%2Ftr%2Ftd%5B4%5D%2Ffont%22"] encoding:NSUTF8StringEncoding error:nil];
+    NSString *xmlData = [NSString stringWithContentsOfURL:[[NSURL alloc] initWithString: @"http://query.yahooapis.com/v1/public/yql/ming/a"] encoding:NSUTF8StringEncoding error:nil];
     if (nil != xmlData) {
         NSError *error = nil;
         
         GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithXMLString:xmlData options:0 error:&error];
-        
-        
+
+        NSArray *items = [doc nodesForXPath:@"//query/results//font" error:nil];
+        int count = 0;
+        for(GDataXMLElement *item in items) {
 #ifdef DEBUG
-        NSLog(@"%s|%@",__PRETTY_FUNCTION__,xmlData);
-#endif
-        
-        //    NSArray *partyMembers = [doc.rootElement elementsForName:@"Player"];
-        NSArray *partyMembers = [doc nodesForXPath:@"//query/results/font" error:nil];
-        
-        for(GDataXMLElement *partyMember in partyMembers) {
-#ifdef DEBUG
-            NSLog(@"%s|%@",__PRETTY_FUNCTION__,partyMember.stringValue);
+            NSLog(@"%s|(%d)%@",__PRETTY_FUNCTION__,count++,item.stringValue);
 #endif
         }
     }
