@@ -15,22 +15,32 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    NSString *xmlData = [NSString stringWithContentsOfURL:[[NSURL alloc] initWithString: @"http://query.yahooapis.com/v1/public/yql/ming/a"] encoding:NSUTF8StringEncoding error:nil];
-    if (nil != xmlData) {
-        NSError *error = nil;
-        
-        GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithXMLString:xmlData options:0 error:&error];
+    for (int i=1; i<=153; i++) {
+        for (int j=1; j<500; j++) {
+            // Override point for customization after application launch.
+            NSString *urlstr = [NSString stringWithFormat:@"http://query.yahooapis.com/v1/public/yql?q=select * from html where url = \"https://www.caac.ccu.edu.tw/caac102/102ad_ColgtQrym/html/102_%03d%03d.htm\" and xpath = \"//table\"", i, j];
+            
+            urlstr = [urlstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSString *xmlData = [NSString stringWithContentsOfURL:[[NSURL alloc] initWithString: urlstr] encoding:NSUTF8StringEncoding error:nil];
+            
+            NSError *error = nil;
+            
+            GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithXMLString:xmlData options:0 error:&error];
+            NSArray *results = [doc nodesForXPath:@"//query/results//font" error:nil];
 
-        NSArray *items = [doc nodesForXPath:@"//query/results//font" error:nil];
-        int count = 0;
-        for(GDataXMLElement *item in items) {
+            int count = 0;
+            if (results.count != 0) {
 #ifdef DEBUG
-            NSLog(@"%s|(%d)%@",__PRETTY_FUNCTION__,count++,item.stringValue);
+                NSLog(@"%03d%03d",i,j);
 #endif
+                for(GDataXMLElement *item in results) {
+#ifdef DEBUG
+//                    NSLog(@"%s|(%d)%@",__PRETTY_FUNCTION__,count++,item.stringValue);
+#endif
+                }
+            }
         }
     }
-    
     
     //    }
     return YES;
