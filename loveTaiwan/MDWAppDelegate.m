@@ -11,12 +11,14 @@
 #import "AFNetworking.h"
 #import "GDataXMLNode.h"
 
+#import "MDWDepartmentController.h"
+
 @implementation MDWAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    for (int i=1; i<=153; i++) {
-        for (int j=1; j<500; j++) {
+    for (int i=1; i<2; i++) {
+        for (int j=12; j<700; j=j+10) {
             // Override point for customization after application launch.
             NSString *urlstr = [NSString stringWithFormat:@"http://query.yahooapis.com/v1/public/yql?q=select * from html where url = \"https://www.caac.ccu.edu.tw/caac102/102ad_ColgtQrym/html/102_%03d%03d.htm\" and xpath = \"//table\"", i, j];
             
@@ -26,18 +28,31 @@
             NSError *error = nil;
             
             GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithXMLString:xmlData options:0 error:&error];
-            NSArray *results = [doc nodesForXPath:@"//query/results//font" error:nil];
+            NSArray *data = [doc nodesForXPath:@"//query/results//font" error:nil];
 
-            int count = 0;
-            if (results.count != 0) {
+
+            if (data.count != 0) {
+                
+                NSString *title = ((GDataXMLElement *)data[0]).stringValue;
 #ifdef DEBUG
-                NSLog(@"%03d%03d",i,j);
+                NSLog(@"%03d%03d %@",i,j,title);
 #endif
-                for(GDataXMLElement *item in results) {
-#ifdef DEBUG
-//                    NSLog(@"%s|(%d)%@",__PRETTY_FUNCTION__,count++,item.stringValue);
-#endif
+                MDWDepartmentController * controller = [MDWDepartmentController getDefaultInstance];
+                
+                Departments *result = [controller findTitle:title];
+                
+                if (!result) {
+                    result = [controller insertTitle:title];
                 }
+                [controller parseData:data toDepartment:result];
+                [controller saveContext];
+
+//                int count = 0;
+//                for(GDataXMLElement *item in results) {
+//#ifdef DEBUG
+//                    NSLog(@"%s|(%d)%@",__PRETTY_FUNCTION__,count++,item.stringValue);
+//#endif
+//                }
             }
         }
     }

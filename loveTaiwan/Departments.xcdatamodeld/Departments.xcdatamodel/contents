@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="12C60" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Departments" representedClassName="Departments" syncable="YES">
+        <attribute name="chinese1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="chinese2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="chinese3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="departmentID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="english1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="english2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="english3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="math1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="math2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="math3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nature1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nature2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nature3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="remarks" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reviewItems" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="schoolID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selecteItems" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="social1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="social2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="social3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="total1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="total2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="total3" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Departments" positionX="160" positionY="192" width="128" height="420"/>
+    </elements>
+</model>

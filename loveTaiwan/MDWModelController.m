@@ -9,6 +9,7 @@
 #import "MDWModelController.h"
 
 #import "MDWDataViewController.h"
+#import "MDWDepartmentController.h"
 
 /*
  A controller object that manages a simple model -- a collection of month names.
@@ -30,8 +31,9 @@
     self = [super init];
     if (self) {
         // Create the data model.
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        _pageData = [dateFormatter monthSymbols];
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        _pageData = [dateFormatter monthSymbols];
+        _pageData = [[MDWDepartmentController getDefaultInstance] fetchAllDepartments];
     }
     return self;
 }
