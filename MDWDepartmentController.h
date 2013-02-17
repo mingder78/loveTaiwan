@@ -16,7 +16,10 @@
     NSManagedObjectContext *managedObjectContext;
     NSManagedObjectModel *managedObjectModel;
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
+    int *_doubleDigits;
 }
+
+@property int *doubleDigits;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
@@ -27,5 +30,6 @@
 - (Departments *)insertTitle: (NSString *)title;
 - (NSArray *)fetchAllDepartments;
 - (Departments *)findTitle:(NSString *)title;
-- (void) parseData:(NSArray *)data toDepartment:(MDWDepartmentController *)department;
+- (Departments *)findDepartmentID:(NSString *)departmentID;
+- (void) parseData:(NSArray *)data toDepartment:(Departments *)department schoolID:(int)i departmentID:(int)j;
 @end

@@ -12,12 +12,13 @@
 
 @implementation MDWDepartmentController
 
+#define LIST_MAX_DEPARTMENT {602,392,372,442,222,392,202,302,432,0,342,192,292,482,372,242,622,492,142,532,182,162,212,0,82,212,222,22,0,212,162,212,202,402,152,202,122,232,72,192,302,542,302,142,402,332,262,0,0,332,282,0,0,0,0,262,0,172,272,72,22,0,42,0,202,0,0,0,0,0,0,0,0,0,0,0,0,0,282,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,202,412,202,0,0,0,0,0,0,162,132,292,132,102,102,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,182,0,142,172,442,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,152,182,32,172}
+
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 static MDWDepartmentController *instance;
-
 #pragma mark - presistance database
 
 - (void)saveContext {
@@ -88,6 +89,8 @@ static MDWDepartmentController *instance;
     @synchronized(self) {
         if (instance == nil){
             instance = [[MDWDepartmentController alloc] init];
+            static int bufferDoubleDigits[154] = LIST_MAX_DEPARTMENT;
+            instance.doubleDigits = bufferDoubleDigits;
         }
     }
     return instance;
@@ -96,7 +99,6 @@ static MDWDepartmentController *instance;
 #pragma mark - database operations
 
 - (Departments *)insertTitle: (NSString *)title{
-    
     Departments *object = [NSEntityDescription insertNewObjectForEntityForName:@"Departments"
                                                         inManagedObjectContext:[self managedObjectContext]];
     [object setTitle:title];
@@ -135,16 +137,36 @@ static MDWDepartmentController *instance;
     NSError *error = nil;
     NSArray *result = [context executeFetchRequest:request error:&error];
     if (nil != result && !error) {
-#ifdef DEBUG
-        NSLog(@"%s|%@",__PRETTY_FUNCTION__,[result lastObject]);
-#endif
         return [result lastObject];
     } else {
         return nil;
     }
 }
 
-- (void) parseData:(NSArray *)data toDepartment:(Departments *)department{
+// return same title item or nil
+- (Departments *)findDepartmentID:(NSString *)departmentID
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSManagedObjectContext *context = [self managedObjectContext];
+    request.entity = [NSEntityDescription entityForName:@"Departments" inManagedObjectContext:context];
+    request.predicate = [NSPredicate predicateWithFormat:@"departmentID = %@", departmentID];
+    
+    NSError *error = nil;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    if (result.count > 0 && !error) {
+        return [result lastObject];
+    } else {
+        return nil;
+    }
+}
+
+- (void) parseData:(NSArray *)data toDepartment:(Departments *)department schoolID:(int)i departmentID:(int)j
+{
+    department.schoolID = [NSString stringWithFormat:@"%03d", i];
+    department.departmentID = [NSString stringWithFormat:@"%03d%03d", i, j];
+#ifdef DEBUG
+    NSLog(@"%s|%@",__PRETTY_FUNCTION__,department.title);
+#endif
     for (int i = 0; i < data.count; i++) {
         NSString *element  = ((GDataXMLElement *)data[i]).stringValue;
         if ([element isEqualToString:@"國文"]) {
@@ -175,4 +197,8 @@ static MDWDepartmentController *instance;
     }
 }
 
+- (int *)doubleDigits
+{
+    return _doubleDigits;
+}
 @end
