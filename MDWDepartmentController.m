@@ -172,7 +172,7 @@ static MDWDepartmentController *instance;
         if ([element isEqualToString:@"國文"]) {
             department.chinese1 = ((GDataXMLElement *)data[++i]).stringValue;
             department.chinese2 = ((GDataXMLElement *)data[++i]).stringValue;
-            department.chinese1 = ((GDataXMLElement *)data[++i]).stringValue;
+            department.chinese3 = ((GDataXMLElement *)data[++i]).stringValue;
         } else if ([element isEqualToString:@"英文"]) {
             department.english1 = ((GDataXMLElement *)data[++i]).stringValue;
             department.english2 = ((GDataXMLElement *)data[++i]).stringValue;

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4F31A33116D3B6650073779B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4F31A33016D3B6650073779B /* Settings.bundle */; };
 		4F31A33216D3B6650073779B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4F31A33016D3B6650073779B /* Settings.bundle */; };
+		4F31A33516D4FC430073779B /* MDWScoreLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F31A33416D4FC430073779B /* MDWScoreLevel.m */; };
 		4F61A9B716C8F5C600FA2EA7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F61A9B616C8F5C600FA2EA7 /* UIKit.framework */; };
 		4F61A9B916C8F5C600FA2EA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F61A9B816C8F5C600FA2EA7 /* Foundation.framework */; };
 		4F61A9BB16C8F5C600FA2EA7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F61A9BA16C8F5C600FA2EA7 /* CoreGraphics.framework */; };
@@ -49,6 +50,8 @@
 		057067E8E62F4A5888E3BBEA /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		3D02D6BD0FA1478FB5F285B2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F31A33016D3B6650073779B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		4F31A33316D4FC430073779B /* MDWScoreLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDWScoreLevel.h; sourceTree = "<group>"; };
+		4F31A33416D4FC430073779B /* MDWScoreLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDWScoreLevel.m; sourceTree = "<group>"; };
 		4F61A9B316C8F5C600FA2EA7 /* loveTaiwan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = loveTaiwan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F61A9B616C8F5C600FA2EA7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4F61A9B816C8F5C600FA2EA7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -154,6 +157,8 @@
 				4F61A9CF16C8F5C600FA2EA7 /* MDWRootViewController.m */,
 				4F61A9D116C8F5C600FA2EA7 /* MDWDataViewController.h */,
 				4F61A9D216C8F5C600FA2EA7 /* MDWDataViewController.m */,
+				4F31A33316D4FC430073779B /* MDWScoreLevel.h */,
+				4F31A33416D4FC430073779B /* MDWScoreLevel.m */,
 				4F61A9D416C8F5C600FA2EA7 /* MDWModelController.h */,
 				4F61A9D516C8F5C600FA2EA7 /* MDWModelController.m */,
 				4F61A9D716C8F5C600FA2EA7 /* MainStoryboard_iPhone.storyboard */,
@@ -337,6 +342,7 @@
 				4FB492D316CE4F18006693D2 /* Departments.xcdatamodeld in Sources */,
 				4FB492D616CE62F2006693D2 /* Departments.m in Sources */,
 				4FB492DB16CE666E006693D2 /* MDWDepartmentController.m in Sources */,
+				4F31A33516D4FC430073779B /* MDWScoreLevel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
