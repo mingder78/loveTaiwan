@@ -29,6 +29,7 @@
 - (void)saveContext;
 - (Departments *)insertTitle: (NSString *)title;
 - (NSArray *)fetchAllDepartments;
+- (NSArray *)okForRachelDepartments;
 - (Departments *)findTitle:(NSString *)title;
 - (Departments *)findDepartmentID:(NSString *)departmentID;
 - (void) parseData:(NSArray *)data toDepartment:(Departments *)department schoolID:(int)i departmentID:(int)j;

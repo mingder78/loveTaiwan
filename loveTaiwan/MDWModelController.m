@@ -33,7 +33,7 @@
         // Create the data model.
 //        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 //        _pageData = [dateFormatter monthSymbols];
-        _pageData = [[MDWDepartmentController getDefaultInstance] fetchAllDepartments];
+        _pageData = [[MDWDepartmentController getDefaultInstance] okForRachelDepartments];
     }
     return self;
 }

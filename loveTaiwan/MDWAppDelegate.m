@@ -18,24 +18,22 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSMutableArray *doubleDigits = [NSMutableArray arrayWithCapacity:153];
-        MDWDepartmentController *controller = [MDWDepartmentController getDefaultInstance];
-//    for (int i=1; i<154; i++) {
-//       [doubleDigits addObject:[NSNumber numberWithInt:controller.doubleDigits[i-1]]];
-//#ifdef DEBUG
-//        NSLog(@"%s|%@",__PRETTY_FUNCTION__,[NSNumber numberWithInt:controller.doubleDigits[i-1]]);
-//#endif
-//    }
-       for (int i=1; i<154; i++) {
-           
- 
-//        int max = ((NSNumber *)doubleDigits[i-1]).intValue + 1;
-           int max = controller.doubleDigits[i-1] + 1;
+    MDWDepartmentController *controller = [MDWDepartmentController getDefaultInstance];
+    //    for (int i=1; i<154; i++) {
+    //       [doubleDigits addObject:[NSNumber numberWithInt:controller.doubleDigits[i-1]]];
+    //#ifdef DEBUG
+    //        NSLog(@"%s|%@",__PRETTY_FUNCTION__,[NSNumber numberWithInt:controller.doubleDigits[i-1]]);
+    //#endif
+    //    }
+    for (int i=1; i<51; i++) { //154
+        
+        
+        //        int max = ((NSNumber *)doubleDigits[i-1]).intValue + 1;
+        int max = controller.doubleDigits[i-1] + 1;
         for (int j=12; j < max; j=j+10) {
- #ifdef DEBUG
-        NSLog(@"%s|%d %d",__PRETTY_FUNCTION__,max, j);
-#endif           
-            
-            
+#ifdef DEBUG
+            NSLog(@"%s|%d %d",__PRETTY_FUNCTION__,max, j);
+#endif
             [self getDataForSchoolID:i departmentID:j];
         }
     }

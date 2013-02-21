@@ -126,6 +126,45 @@ static MDWDepartmentController *instance;
     return fetchedObjects;
 }
 
+- (NSArray *)okForRachelDepartments {
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Departments" inManagedObjectContext:[self managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    fetchRequest.predicate = [NSPredicate
+                              predicateWithFormat:@"(NOT(english1 contains[cd] %@) AND NOT(english1 contains[cd] %@)) AND NOT(math1 contains[cd] %@)",
+                               @"頂標", @"前標", @"頂標"];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"math2" ascending:YES];
+    NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"english2" ascending:YES];
+    
+    NSSortDescriptor *sortDescriptor3 = [[NSSortDescriptor alloc] initWithKey:@"chinese3" ascending:NO];
+        NSSortDescriptor *sortDescriptor4 = [[NSSortDescriptor alloc] initWithKey:@"social3" ascending:NO];
+        NSSortDescriptor *sortDescriptor5 = [[NSSortDescriptor alloc] initWithKey:@"nature3" ascending:NO];
+        NSSortDescriptor *sortDescriptor6 = [[NSSortDescriptor alloc] initWithKey:@"total3" ascending:NO];
+        NSSortDescriptor *sortDescriptor7 = [[NSSortDescriptor alloc] initWithKey:@"english3" ascending:YES];
+        NSSortDescriptor *sortDescriptor8 = [[NSSortDescriptor alloc] initWithKey:@"math3" ascending:YES];
+    
+        NSSortDescriptor *sortDescriptor9 = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:NO];
+
+    fetchRequest.sortDescriptors = @[sortDescriptor, sortDescriptor2, sortDescriptor8, sortDescriptor7,sortDescriptor3, sortDescriptor4, sortDescriptor5, sortDescriptor6,  sortDescriptor9];
+    
+//fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(NOT (math1 contains[cd] %@)) AND ((NOT (english1 contains[cd] %@)) OR (NOT (english1 contains[cd] %@)))", @"頂標", @"前標", @"頂標"];
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    if (fetchedObjects == nil) {
+        NSLog(@"no data");
+    } else {
+        for (Departments *a in fetchedObjects) {
+            NSLog(@"%@",a.title);
+        }
+#ifdef DEBUG
+        NSLog(@"%s|%d",__PRETTY_FUNCTION__,fetchedObjects.count);
+#endif
+    }
+    return fetchedObjects;
+}
+
 // return same title item or nil
 - (Departments *)findTitle:(NSString *)title
 {
@@ -172,27 +211,29 @@ static MDWDepartmentController *instance;
         if ([element isEqualToString:@"國文"]) {
             department.chinese1 = ((GDataXMLElement *)data[++i]).stringValue;
             department.chinese2 = ((GDataXMLElement *)data[++i]).stringValue;
-            department.chinese3 = ((GDataXMLElement *)data[++i]).stringValue;
+            department.chinese3 = [[((GDataXMLElement *)data[++i]).stringValue stringByReplacingOccurrencesOfString:@"*" withString:@"" ]stringByReplacingOccurrencesOfString:@"--" withString:@"0.00" ];
         } else if ([element isEqualToString:@"英文"]) {
             department.english1 = ((GDataXMLElement *)data[++i]).stringValue;
             department.english2 = ((GDataXMLElement *)data[++i]).stringValue;
-            department.english3 = ((GDataXMLElement *)data[++i]).stringValue;
+            department.english3 = [((GDataXMLElement *)data[++i]).stringValue stringByReplacingOccurrencesOfString:@"*" withString:@"" ];
         } else if ([element isEqualToString:@"數學"]) {
             department.math1 = ((GDataXMLElement *)data[++i]).stringValue;
             department.math2 = ((GDataXMLElement *)data[++i]).stringValue;
-            department.math3 = ((GDataXMLElement *)data[++i]).stringValue;
+            department.math3 = [((GDataXMLElement *)data[++i]).stringValue stringByReplacingOccurrencesOfString:@"*" withString:@"" ];
         } else if ([element isEqualToString:@"社會"]) {
             department.social1 = ((GDataXMLElement *)data[++i]).stringValue;
             department.social2 = ((GDataXMLElement *)data[++i]).stringValue;
-            department.social3 = ((GDataXMLElement *)data[++i]).stringValue;
+            department.social3 = [((GDataXMLElement *)data[++i]).stringValue stringByReplacingOccurrencesOfString:@"*" withString:@"" ];
         } else if ([element isEqualToString:@"自然"]) {
             department.nature1 = ((GDataXMLElement *)data[++i]).stringValue;
             department.nature2 = ((GDataXMLElement *)data[++i]).stringValue;
-            department.nature3 = ((GDataXMLElement *)data[++i]).stringValue;
+            department.nature3 = [((GDataXMLElement *)data[++i]).stringValue stringByReplacingOccurrencesOfString:@"*" withString:@"" ];
         } else if ([element isEqualToString:@"總級分"]) {
             department.total1 = ((GDataXMLElement *)data[++i]).stringValue;
             department.total2 = ((GDataXMLElement *)data[++i]).stringValue;
-            department.total3 = ((GDataXMLElement *)data[++i]).stringValue;
+            department.total3 = [((GDataXMLElement *)data[++i]).stringValue stringByReplacingOccurrencesOfString:@"*" withString:@"" ];
+        } else if ([element isEqualToString:@"招生名額"]) {
+            department.number = [[[NSNumberFormatter alloc] init] numberFromString: [((GDataXMLElement *)data[++i]) stringValue]];
         }
     }
 }
