@@ -11,6 +11,12 @@
 #import "MDWModelController.h"
 
 #import "MDWDataViewController.h"
+#import "MDWDepartmentController.h"
+
+#import "JSONKit.h"
+#import "AFNetworking.h"
+#import "GDataXMLNode.h"
+#import "SVProgressHUD.h"
 
 @interface MDWRootViewController ()
 @property (readonly, strong, nonatomic) MDWModelController *modelController;
@@ -48,6 +54,39 @@
 
     // Add the page view controller's gesture recognizers to the book view controller's view so that the gestures are started more easily.
     self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
+    [SVProgressHUD show];
+
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSMutableArray *doubleDigits = [NSMutableArray arrayWithCapacity:153];
+    MDWDepartmentController *controller = [MDWDepartmentController getDefaultInstance];
+    //    for (int i=1; i<154; i++) {
+    //       [doubleDigits addObject:[NSNumber numberWithInt:controller.doubleDigits[i-1]]];
+    //#ifdef DEBUG
+    //        NSLog(@"%s|%@",__PRETTY_FUNCTION__,[NSNumber numberWithInt:controller.doubleDigits[i-1]]);
+    //#endif
+    //    }
+    for (int i=1; i<2; i++) { //154
+        
+        
+        //        int max = ((NSNumber *)doubleDigits[i-1]).intValue + 1;
+        int max = controller.doubleDigits[i-1] + 1;
+//        int count=0;
+        for (int j=12; j < max; j=j+10) {
+#ifdef DEBUG
+            NSLog(@"%s|%d %d",__PRETTY_FUNCTION__,max, j);
+#endif
+            [self getDataForSchoolID:i departmentID:j];
+//            [self performSelectorOnMainThread:@selector(showHUD:) withObject:[NSNumber numberWithInteger:count++] waitUntilDone:NO];
+        }
+    }
+    [SVProgressHUD dismiss];
+}
+
+- (void) showHUD:(NSNumber *) number {
+    [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"%d",number.integerValue]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,6 +143,38 @@
 
 
     return UIPageViewControllerSpineLocationMid;
+}
+
+#pragma mark - internal methods
+
+- (void) getDataForSchoolID: (int) i departmentID: (int) j
+{
+    MDWDepartmentController *controller = [MDWDepartmentController getDefaultInstance];
+    if([controller findDepartmentID:[NSString stringWithFormat:@"%03d%03d",i,j]]) {
+        return;
+    }
+    NSString *urlstr = [NSString stringWithFormat:@"http://query.yahooapis.com/v1/public/yql?q=select * from html where url = \"https://www.caac.ccu.edu.tw/caac102/102ad_ColgtQrym/html/102_%03d%03d.htm\" and xpath = \"//table\"", i, j];
+    
+    urlstr = [urlstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *xmlData = [NSString stringWithContentsOfURL:[[NSURL alloc] initWithString: urlstr] encoding:NSUTF8StringEncoding error:nil];
+    
+    NSError *error = nil;
+    
+    GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithXMLString:xmlData options:0 error:&error];
+    if (!error) {
+        NSArray *data = [doc nodesForXPath:@"//query/results//font" error:&error];
+        if (data.count != 0 && !error) {
+            NSString *title = ((GDataXMLElement *)data[0]).stringValue;
+            
+            Departments *depart = [controller findTitle:title];
+            
+            if (!depart) {
+                depart = [controller insertTitle:title];
+            }
+            [controller parseData:data toDepartment:depart schoolID:i departmentID:j];
+            [controller saveContext];
+        }
+    }
 }
 
 @end
