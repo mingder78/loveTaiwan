@@ -6,5 +6,6 @@ To find the best list of choices for applying universities and colleges in Taiwa
 install
 ==========
 $ pod install
+
 $ open *workspace
 
