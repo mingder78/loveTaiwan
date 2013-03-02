@@ -29,6 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self parse];
 	// Do any additional setup after loading the view, typically from a nib.
     // Configure the page view controller and add it as a child view controller.
     self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
@@ -54,11 +55,9 @@
 
     // Add the page view controller's gesture recognizers to the book view controller's view so that the gestures are started more easily.
     self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
-    [SVProgressHUD show];
-
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)parse
 {
     NSMutableArray *doubleDigits = [NSMutableArray arrayWithCapacity:153];
     MDWDepartmentController *controller = [MDWDepartmentController getDefaultInstance];
@@ -68,7 +67,7 @@
     //        NSLog(@"%s|%@",__PRETTY_FUNCTION__,[NSNumber numberWithInt:controller.doubleDigits[i-1]]);
     //#endif
     //    }
-    for (int i=1; i<2; i++) { //154
+    for (int i=1; i<154; i++) { //154
         
         
         //        int max = ((NSNumber *)doubleDigits[i-1]).intValue + 1;
@@ -82,11 +81,7 @@
 //            [self performSelectorOnMainThread:@selector(showHUD:) withObject:[NSNumber numberWithInteger:count++] waitUntilDone:NO];
         }
     }
-    [SVProgressHUD dismiss];
-}
 
-- (void) showHUD:(NSNumber *) number {
-    [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"%d",number.integerValue]];
 }
 
 - (void)didReceiveMemoryWarning
