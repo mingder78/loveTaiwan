@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *dataLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dataLabel2;
+@property (strong, nonatomic) IBOutlet UILabel *date;
 
 @property (strong, nonatomic) IBOutlet UILabel *chinese1;
 @property (strong, nonatomic) IBOutlet UILabel *chinese2;

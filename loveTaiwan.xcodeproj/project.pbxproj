@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F1CA85216E392EC002ADC55 /* Departments.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1CA85116E392EC002ADC55 /* Departments.m */; };
 		4F31A33116D3B6650073779B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4F31A33016D3B6650073779B /* Settings.bundle */; };
 		4F31A33216D3B6650073779B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4F31A33016D3B6650073779B /* Settings.bundle */; };
 		4F31A33516D4FC430073779B /* MDWScoreLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F31A33416D4FC430073779B /* MDWScoreLevel.m */; };
@@ -30,7 +31,6 @@
 		4F61A9EE16C8F5C600FA2EA7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F61A9EC16C8F5C600FA2EA7 /* InfoPlist.strings */; };
 		4F61A9F116C8F5C600FA2EA7 /* loveTaiwanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F61A9F016C8F5C600FA2EA7 /* loveTaiwanTests.m */; };
 		4FB492D316CE4F18006693D2 /* Departments.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4FB492D116CE4F18006693D2 /* Departments.xcdatamodeld */; };
-		4FB492D616CE62F2006693D2 /* Departments.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB492D516CE62F2006693D2 /* Departments.m */; };
 		4FB492D816CE65E7006693D2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FB492D716CE65E7006693D2 /* CoreData.framework */; };
 		4FB492DB16CE666E006693D2 /* MDWDepartmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB492DA16CE666E006693D2 /* MDWDepartmentController.m */; };
 		D97331C2DE1246AA9B43915C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D02D6BD0FA1478FB5F285B2 /* libPods.a */; };
@@ -49,6 +49,8 @@
 /* Begin PBXFileReference section */
 		057067E8E62F4A5888E3BBEA /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		3D02D6BD0FA1478FB5F285B2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F1CA85016E392EC002ADC55 /* Departments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Departments.h; sourceTree = "<group>"; };
+		4F1CA85116E392EC002ADC55 /* Departments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Departments.m; sourceTree = "<group>"; };
 		4F31A33016D3B6650073779B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		4F31A33316D4FC430073779B /* MDWScoreLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDWScoreLevel.h; sourceTree = "<group>"; };
 		4F31A33416D4FC430073779B /* MDWScoreLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDWScoreLevel.m; sourceTree = "<group>"; };
@@ -80,8 +82,6 @@
 		4F61A9EF16C8F5C600FA2EA7 /* loveTaiwanTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = loveTaiwanTests.h; sourceTree = "<group>"; };
 		4F61A9F016C8F5C600FA2EA7 /* loveTaiwanTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = loveTaiwanTests.m; sourceTree = "<group>"; };
 		4FB492D216CE4F18006693D2 /* Departments.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Departments.xcdatamodel; sourceTree = "<group>"; };
-		4FB492D416CE62F2006693D2 /* Departments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Departments.h; sourceTree = "<group>"; };
-		4FB492D516CE62F2006693D2 /* Departments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Departments.m; sourceTree = "<group>"; };
 		4FB492D716CE65E7006693D2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		4FB492D916CE666E006693D2 /* MDWDepartmentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDWDepartmentController.h; sourceTree = "<group>"; };
 		4FB492DA16CE666E006693D2 /* MDWDepartmentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDWDepartmentController.m; sourceTree = "<group>"; };
@@ -165,8 +165,8 @@
 				4F61A9DA16C8F5C600FA2EA7 /* MainStoryboard_iPad.storyboard */,
 				4F61A9BD16C8F5C600FA2EA7 /* Supporting Files */,
 				4FB492D116CE4F18006693D2 /* Departments.xcdatamodeld */,
-				4FB492D416CE62F2006693D2 /* Departments.h */,
-				4FB492D516CE62F2006693D2 /* Departments.m */,
+				4F1CA85016E392EC002ADC55 /* Departments.h */,
+				4F1CA85116E392EC002ADC55 /* Departments.m */,
 			);
 			path = loveTaiwan;
 			sourceTree = "<group>";
@@ -340,9 +340,9 @@
 				4F61A9D316C8F5C600FA2EA7 /* MDWDataViewController.m in Sources */,
 				4F61A9D616C8F5C600FA2EA7 /* MDWModelController.m in Sources */,
 				4FB492D316CE4F18006693D2 /* Departments.xcdatamodeld in Sources */,
-				4FB492D616CE62F2006693D2 /* Departments.m in Sources */,
 				4FB492DB16CE666E006693D2 /* MDWDepartmentController.m in Sources */,
 				4F31A33516D4FC430073779B /* MDWScoreLevel.m in Sources */,
+				4F1CA85216E392EC002ADC55 /* Departments.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

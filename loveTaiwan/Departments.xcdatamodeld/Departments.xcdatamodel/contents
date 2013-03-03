@@ -4,6 +4,7 @@
         <attribute name="chinese1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="chinese2" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="chinese3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="departmentID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="english1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="english2" optional="YES" attributeType="String" syncable="YES"/>
@@ -28,6 +29,6 @@
         <attribute name="total3" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Departments" positionX="160" positionY="192" width="128" height="420"/>
+        <element name="Departments" positionX="160" positionY="192" width="128" height="435"/>
     </elements>
 </model>

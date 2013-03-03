@@ -53,6 +53,8 @@
     self.total2.text = (NSString *)[self.dataObject total2];
     self.total3.text = (NSString *)[self.dataObject total3];
     self.number.text = [NSString stringWithFormat:@"%@",((Departments *)self.dataObject).number];
+    
+    self.date.text = (NSString *)[self.dataObject date];
 
     [MDWScoreLevel new];
     

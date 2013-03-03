@@ -132,7 +132,7 @@ static MDWDepartmentController *instance;
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Departments" inManagedObjectContext:[self managedObjectContext]];
     [fetchRequest setEntity:entity];
     fetchRequest.predicate = [NSPredicate
-                              predicateWithFormat:@"(title contains[cd] %@) AND (NOT(english1 contains[cd] %@) AND NOT(english1 contains[cd] %@)) AND NOT(math1 contains[cd] %@)",@"設計",
+                              predicateWithFormat:@"(title contains[cd] %@) AND (NOT(english1 contains[cd] %@) AND NOT(english1 contains[cd] %@)) AND NOT(math1 contains[cd] %@)",@"大學",
                                @"頂標", @"前標", @"頂標"];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"math2" ascending:YES];
     NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"english2" ascending:YES];
@@ -234,6 +234,8 @@ static MDWDepartmentController *instance;
             department.total3 = [((GDataXMLElement *)data[++i]).stringValue stringByReplacingOccurrencesOfString:@"*" withString:@"" ];
         } else if ([element isEqualToString:@"招生名額"]) {
             department.number = [[[NSNumberFormatter alloc] init] numberFromString: [((GDataXMLElement *)data[++i]) stringValue]];
+        } else if ([element isEqualToString:@"指定項目甄試日期"]) {
+            department.date = ((GDataXMLElement *)data[++i]).stringValue;
         }
     }
 }
