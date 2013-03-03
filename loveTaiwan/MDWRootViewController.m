@@ -67,7 +67,7 @@
     //        NSLog(@"%s|%@",__PRETTY_FUNCTION__,[NSNumber numberWithInt:controller.doubleDigits[i-1]]);
     //#endif
     //    }
-    for (int i=1; i<2; i++) { //154
+    for (int i=1; i<154; i++) { //154
         
         
         //        int max = ((NSNumber *)doubleDigits[i-1]).intValue + 1;
